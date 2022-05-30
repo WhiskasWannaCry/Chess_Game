@@ -15,7 +15,7 @@ let chesses = [
 		type: "queen",
 		position: {
 			row: 7,
-			col: 4,
+			col: 3,
 		}
 	},
 	{
@@ -23,7 +23,7 @@ let chesses = [
 		type: "king",
 		position: {
 			row: 7,
-			col: 3,
+			col: 4,
 		}
 	},
 	{
@@ -75,10 +75,66 @@ let chesses = [
 		}
 	},
 	{
-		color: "white",
+		color: "black",
+		type: "queen",
+		position: {
+			row: 0,
+			col: 3,
+		}
+	},
+	{
+		color: "black",
+		type: "king",
+		position: {
+			row: 0,
+			col: 4,
+		}
+	},
+	{
+		color: "black",
+		type: "bishopLeft",
+		position: {
+			row: 0,
+			col: 2
+		}
+	},
+	{
+		color: "black",
+		type: "bishopRight",
+		position: {
+			row: 0,
+			col: 5,
+		}
+	},
+	{
+		color: "black",
+		type: "knightLeft",
+		position: {
+			row: 0,
+			col: 1,
+		}
+	},
+	{
+		color: "black",
+		type: "knightRight",
+		position: {
+			row: 0,
+			col: 6,
+		}
+	},
+	{
+		color: "black",
+		type: "rookLeft",
+		position: {
+			row: 0,
+			col: 0,
+		}
+	},
+	{
+		color: "black",
 		type: "rookright",
 		position: {
-			row: 7,
+			row: 0,
 			col: 7,
 		}
 	},
