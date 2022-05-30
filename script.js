@@ -9,7 +9,7 @@ const field = [
 	[0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
-let chess = [
+let chesses = [
 	{
 		color: "white",
 		type: "queen",
