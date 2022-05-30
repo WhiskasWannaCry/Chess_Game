@@ -1,0 +1,54 @@
+body {
+	display: flex;
+
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	background-size: 100%;
+	background-image: url(https://img.freepik.com/free-photo/marble-light-beige-stone-texture-light-wall-background_119828-1349.jpg);
+}
+
+.container_lose_black {
+	display: flex;
+	width: 150px;
+	height: 500px;
+	background-color: rgb(96, 252, 96);
+}
+
+.container_lose_white {
+	display: flex;
+	width: 150px;
+	height: 500px;
+	background-color: rgb(96, 252, 96);
+}
+
+.container_chess {
+	display: flex;
+	flex-direction: column;
+	height: 600px;
+	width: 600px;
+	border: 1px solid rgb(32, 32, 32);
+	box-shadow: 0px 0px 19px 5px #000000;
+}
+
+.container_row {
+	display: flex;
+	flex-grow: 1;
+}
+
+.container_row:nth-child(2n+1) .block_container:nth-child(2n+1) {
+	background-size: 100%;
+	background-image: url(https://txtrs.ru/textures/wood/wood-8.jpg);
+}
+
+.container_row:nth-child(2n) .block_container:nth-child(2n) {
+	background-size: 100%;
+	background-image: url(https://txtrs.ru/textures/wood/wood-8.jpg);
+}
+
+.block_container {
+	display: flex;
+	flex-grow: 1;
+	background-size: 100%;
+	background-image: url(https://junior3d.ru/texture/%D0%94%D0%B5%D1%80%D0%B5%D0%B2%D0%BE/%D0%9D%D0%BE%D0%B2%D0%BE%D0%B5%D0%94%D0%B5%D1%80%D0%B5%D0%B2%D0%BE/%D0%BD%D0%BE%D0%B2%D0%BE%D0%B5-%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE_6.jpg);
+}
