@@ -9,7 +9,7 @@ const field = [
 	[0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
-let chesses = [
+let whiteChesses = [
 	{
 		color: "white",
 		type: "queen",
@@ -75,6 +75,73 @@ let chesses = [
 		}
 	},
 	{
+		color: "white",
+		type: "pawn1",
+		position: {
+			row: 7,
+			col: 0,
+		}
+	},
+	{
+		color: "white",
+		type: "pawn2",
+		position: {
+			row: 7,
+			col: 1,
+		}
+	},
+	{
+		color: "white",
+		type: "pawn3",
+		position: {
+			row: 7,
+			col: 2,
+		}
+	},
+	{
+		color: "white",
+		type: "pawn4",
+		position: {
+			row: 7,
+			col: 3,
+		}
+	},
+	{
+		color: "white",
+		type: "pawn5",
+		position: {
+			row: 7,
+			col: 4,
+		}
+	},
+	{
+		color: "white",
+		type: "pawn6",
+		position: {
+			row: 7,
+			col: 5,
+		}
+	},
+	{
+		color: "white",
+		type: "pawn7",
+		position: {
+			row: 7,
+			col: 6,
+		}
+	},
+	{
+		color: "white",
+		type: "pawn8",
+		position: {
+			row: 7,
+			col: 7,
+		}
+	},
+];
+
+let blackChesses = [
+	{
 		color: "black",
 		type: "queen",
 		position: {
@@ -133,6 +200,70 @@ let chesses = [
 	{
 		color: "black",
 		type: "rookright",
+		position: {
+			row: 0,
+			col: 7,
+		}
+	},
+	{
+		color: "black",
+		type: "pawn1",
+		position: {
+			row: 0,
+			col: 0,
+		}
+	},
+	{
+		color: "black",
+		type: "pawn2",
+		position: {
+			row: 0,
+			col: 1,
+		}
+	},
+	{
+		color: "black",
+		type: "pawn3",
+		position: {
+			row: 0,
+			col: 2,
+		}
+	},
+	{
+		color: "black",
+		type: "pawn4",
+		position: {
+			row: 0,
+			col: 3,
+		}
+	},
+	{
+		color: "black",
+		type: "pawn5",
+		position: {
+			row: 0,
+			col: 4,
+		}
+	},
+	{
+		color: "black",
+		type: "pawn6",
+		position: {
+			row: 0,
+			col: 5,
+		}
+	},
+	{
+		color: "black",
+		type: "pawn7",
+		position: {
+			row: 0,
+			col: 6,
+		}
+	},
+	{
+		color: "black",
+		type: "pawn8",
 		position: {
 			row: 0,
 			col: 7,
