@@ -49,14 +49,24 @@ body {
 
 .block_container {
 	display: flex;
+	justify-content: center;
+	align-items: center;
 	height: 100%;
 	width: 100px;
 	background-size: 100%;
 	background-image: url(https://junior3d.ru/texture/%D0%94%D0%B5%D1%80%D0%B5%D0%B2%D0%BE/%D0%9D%D0%BE%D0%B2%D0%BE%D0%B5%D0%94%D0%B5%D1%80%D0%B5%D0%B2%D0%BE/%D0%BD%D0%BE%D0%B2%D0%BE%D0%B5-%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE_6.jpg);
 }
 
-.chess_img {
+.chess_black_img {
 	display: flex;
-	width: 100%;
-	max-height: 100%;
+	width: 80%;
+	max-height: 80%;
+}
+
+.chess_white_img {
+	display: flex;
+	-webkit-filter: invert(1);
+	filter: invert(1);
+	width: 80%;
+	max-height: 80%;
 }

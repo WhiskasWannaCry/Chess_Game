@@ -23,7 +23,7 @@ const drawField = () => {
 				return elem.position.row === rowIdx && elem.position.col === elemIdx
 			})
 			return `<div class="block_container">${currentElem ?
-				drawChess(currentElem.type, currentElem.color) : ''}</div> `
+				drawChess(currentElem) : ''}</div> `
 		}).join('')}
 		</div>`
 	})
@@ -32,10 +32,16 @@ const drawField = () => {
 
 drawField()
 
-function drawChess(chessType, chessColor) {
-	// if (chessType === "queen") {
-	// 	return `<img src="./white_chess/queen.png">`
-	// }
-	console.log(chessColor)
-	return `<img class="chess_${chessColor}_img" src="./chesses/${chessType}.png"></img>`
+window.clickHandler = (id) => {
+	console.log(id)
+	whiteChesses.map(elem => console.log(elem.id === id))
+	switch (id) {
+		case "white_pawn_1":
+
+	}
 }
+
+function drawChess(chess) {
+	return `<img  onclick="window.clickHandler('${chess.id}')" class="chess_${chess.color}_img" src="./chesses/${chess.type}.png"></img>`
+}
+
