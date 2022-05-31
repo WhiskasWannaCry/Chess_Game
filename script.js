@@ -11,6 +11,7 @@ const field = [
 
 let whiteChesses = [
 	{
+		id: "white_queen",
 		color: "white",
 		type: "queen",
 		position: {
@@ -19,6 +20,7 @@ let whiteChesses = [
 		}
 	},
 	{
+		id: "white_king",
 		color: "white",
 		type: "king",
 		position: {
@@ -27,114 +29,128 @@ let whiteChesses = [
 		}
 	},
 	{
+		id: "white_bishop_left",
 		color: "white",
-		type: "bishopLeft",
+		type: "bishop",
 		position: {
 			row: 7,
 			col: 2
 		}
 	},
 	{
+		id: "white_bishop_right",
 		color: "white",
-		type: "bishopRight",
+		type: "bishop",
 		position: {
 			row: 7,
 			col: 5,
 		}
 	},
 	{
+		id: "white_knight_left",
 		color: "white",
-		type: "knightLeft",
+		type: "knight",
 		position: {
 			row: 7,
 			col: 1,
 		}
 	},
 	{
+		id: "white_knight_right",
 		color: "white",
-		type: "knightRight",
+		type: "knight",
 		position: {
 			row: 7,
 			col: 6,
 		}
 	},
 	{
+		id: "white_rook_left",
 		color: "white",
-		type: "rookLeft",
+		type: "rook",
 		position: {
 			row: 7,
 			col: 0,
 		}
 	},
 	{
+		id: "white_rook_right",
 		color: "white",
-		type: "rookright",
+		type: "rook",
 		position: {
 			row: 7,
 			col: 7,
 		}
 	},
 	{
+		id: "white_pawn_1",
 		color: "white",
-		type: "pawn1",
+		type: "pawn",
 		position: {
-			row: 7,
+			row: 6,
 			col: 0,
 		}
 	},
 	{
+		id: "white_pawn_2",
 		color: "white",
-		type: "pawn2",
+		type: "pawn",
 		position: {
-			row: 7,
+			row: 6,
 			col: 1,
 		}
 	},
 	{
+		id: "white_pawn_3",
 		color: "white",
-		type: "pawn3",
+		type: "pawn",
 		position: {
-			row: 7,
+			row: 6,
 			col: 2,
 		}
 	},
 	{
+		id: "white_pawn_4",
 		color: "white",
-		type: "pawn4",
+		type: "pawn",
 		position: {
-			row: 7,
+			row: 6,
 			col: 3,
 		}
 	},
 	{
+		id: "white_pawn_5",
 		color: "white",
-		type: "pawn5",
+		type: "pawn",
 		position: {
-			row: 7,
+			row: 6,
 			col: 4,
 		}
 	},
 	{
+		id: "white_pawn_6",
 		color: "white",
-		type: "pawn6",
+		type: "pawn",
 		position: {
-			row: 7,
+			row: 6,
 			col: 5,
 		}
 	},
 	{
+		id: "white_pawn_7",
 		color: "white",
-		type: "pawn7",
+		type: "pawn",
 		position: {
-			row: 7,
+			row: 6,
 			col: 6,
 		}
 	},
 	{
+		id: "white_pawn_8",
 		color: "white",
-		type: "pawn8",
+		type: "pawn",
 		position: {
-			row: 7,
+			row: 6,
 			col: 7,
 		}
 	},
@@ -142,6 +158,7 @@ let whiteChesses = [
 
 let blackChesses = [
 	{
+		id: "black_queen",
 		color: "black",
 		type: "queen",
 		position: {
@@ -150,6 +167,7 @@ let blackChesses = [
 		}
 	},
 	{
+		id: "black_king",
 		color: "black",
 		type: "king",
 		position: {
@@ -158,114 +176,128 @@ let blackChesses = [
 		}
 	},
 	{
+		id: "black_bishop_left",
 		color: "black",
-		type: "bishopLeft",
+		type: "bishop",
 		position: {
 			row: 0,
 			col: 2
 		}
 	},
 	{
+		id: "black_bishop_right",
 		color: "black",
-		type: "bishopRight",
+		type: "bishop",
 		position: {
 			row: 0,
 			col: 5,
 		}
 	},
 	{
+		id: "black_knight_left",
 		color: "black",
-		type: "knightLeft",
+		type: "knight",
 		position: {
 			row: 0,
 			col: 1,
 		}
 	},
 	{
+		id: "black_knight_right",
 		color: "black",
-		type: "knightRight",
+		type: "knight",
 		position: {
 			row: 0,
 			col: 6,
 		}
 	},
 	{
+		id: "black_rook_left",
 		color: "black",
-		type: "rookLeft",
+		type: "rook",
 		position: {
 			row: 0,
 			col: 0,
 		}
 	},
 	{
+		id: "black_rook_right",
 		color: "black",
-		type: "rookright",
+		type: "rook",
 		position: {
 			row: 0,
 			col: 7,
 		}
 	},
 	{
+		id: "black_pawn_1",
 		color: "black",
-		type: "pawn1",
+		type: "pawn",
 		position: {
-			row: 0,
+			row: 1,
 			col: 0,
 		}
 	},
 	{
+		id: "black_pawn_2",
 		color: "black",
-		type: "pawn2",
+		type: "pawn",
 		position: {
-			row: 0,
+			row: 1,
 			col: 1,
 		}
 	},
 	{
+		id: "black_pawn_3",
 		color: "black",
-		type: "pawn3",
+		type: "pawn",
 		position: {
-			row: 0,
+			row: 1,
 			col: 2,
 		}
 	},
 	{
+		id: "black_pawn_4",
 		color: "black",
-		type: "pawn4",
+		type: "pawn",
 		position: {
-			row: 0,
+			row: 1,
 			col: 3,
 		}
 	},
 	{
+		id: "black_pawn_5",
 		color: "black",
-		type: "pawn5",
+		type: "pawn",
 		position: {
-			row: 0,
+			row: 1,
 			col: 4,
 		}
 	},
 	{
+		id: "black_pawn_6",
 		color: "black",
-		type: "pawn6",
+		type: "pawn",
 		position: {
-			row: 0,
+			row: 1,
 			col: 5,
 		}
 	},
 	{
+		id: "black_pawn_7",
 		color: "black",
-		type: "pawn7",
+		type: "pawn",
 		position: {
-			row: 0,
+			row: 1,
 			col: 6,
 		}
 	},
 	{
+		id: "black_pawn_8",
 		color: "black",
-		type: "pawn8",
+		type: "pawn",
 		position: {
-			row: 0,
+			row: 1,
 			col: 7,
 		}
 	},
@@ -275,17 +307,27 @@ const drawField = () => {
 	document.body.innerHTML = ` `;
 	document.body.innerHTML += `<div class="container_lose_black"></div>`;
 	document.body.innerHTML += `<div id="container_chess" class="container_chess"></div>`;
-	field.forEach(row => {
+	field.forEach((row, rowIdx) => {
 		document.getElementById('container_chess').innerHTML += `
 		<div class="container_row">
-		${row.map(elem => {
-			if (elem === 0) {
-				return `<div class="block_container"></div>`
-			}
+		${row.map((elem, elemIdx) => {
+			let findElem = [...whiteChesses, ...blackChesses].find(elem => {
+				return elem.position.row === rowIdx && elem.position.col === elemIdx
+			})
+			return `<div class="block_container">${findElem ?
+				drawChess(findElem.type) : ''}</div> `
 		}).join('')}
 		</div>`
 	})
-	document.body.innerHTML += `<div class="container_lose_white"></div>`;
+	document.body.innerHTML += `<div div class="container_lose_white"></div>`;
 }
 
 drawField()
+
+function drawChess(chessType) {
+	// if (chessType === "queen") {
+	// 	return `<img src="./white_chess/queen.png">`
+	// }
+	console.log(chessType)
+	return `<div>${chessType}</div>`
+}
