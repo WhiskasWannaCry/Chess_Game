@@ -57,6 +57,16 @@ body {
 	background-image: url(https://junior3d.ru/texture/%D0%94%D0%B5%D1%80%D0%B5%D0%B2%D0%BE/%D0%9D%D0%BE%D0%B2%D0%BE%D0%B5%D0%94%D0%B5%D1%80%D0%B5%D0%B2%D0%BE/%D0%BD%D0%BE%D0%B2%D0%BE%D0%B5-%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE_6.jpg);
 }
 
+
+.handlerForRadius {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+	border-radius: 50%;
+}
+
 .radius {
 	height: 30px;
 	width: 30px;
