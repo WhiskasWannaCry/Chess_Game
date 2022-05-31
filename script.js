@@ -11,6 +11,9 @@ const field = [
 	[0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
+let whiteMoves = 0;
+let blackMoves = 0;
+
 const drawField = () => {
 	document.body.innerHTML = ` `;
 	document.body.innerHTML += `<div class="container_lose_black"></div>`;
@@ -19,6 +22,9 @@ const drawField = () => {
 		document.getElementById('container_chess').innerHTML += `
 		<div class="container_row">
 		${row.map((elem, elemIdx) => {
+			if (elem === 1) {
+				return `<div class="block_container"><div class="radius"></div></div> `
+			}
 			let currentElem = [...whiteChesses, ...blackChesses].find(elem => {
 				return elem.position.row === rowIdx && elem.position.col === elemIdx
 			})
@@ -32,13 +38,33 @@ const drawField = () => {
 
 drawField()
 
-window.clickHandler = (id) => {
-	console.log(id)
-	whiteChesses.map(elem => console.log(elem.id === id))
-	switch (id) {
-		case "white_pawn_1":
+const updateFieldArray = () => {
+	field.forEach(row => {
+		row.fill(0)
+	})
+}
 
+const pawnRenderVariation = (chess) => {
+	if (chess.color === "white") {
+		updateFieldArray()
+		field[chess.position.row - 1][chess.position.col] = 1;
+		field[chess.position.row - 2][chess.position.col] = 1;
 	}
+	else {
+		updateFieldArray()
+		field[chess.position.row + 1][chess.position.col] = 1;
+		field[chess.position.row + 2][chess.position.col] = 1;
+	}
+}
+
+window.clickHandler = (id) => {
+	let currentElem = [...whiteChesses, ...blackChesses].find(elem => elem.id === id)
+	switch (currentElem.type) {
+		case "pawn":
+			pawnRenderVariation(currentElem)
+			break;
+	}
+	drawField()
 }
 
 function drawChess(chess) {

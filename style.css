@@ -57,6 +57,13 @@ body {
 	background-image: url(https://junior3d.ru/texture/%D0%94%D0%B5%D1%80%D0%B5%D0%B2%D0%BE/%D0%9D%D0%BE%D0%B2%D0%BE%D0%B5%D0%94%D0%B5%D1%80%D0%B5%D0%B2%D0%BE/%D0%BD%D0%BE%D0%B2%D0%BE%D0%B5-%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE_6.jpg);
 }
 
+.radius {
+	height: 30px;
+	width: 30px;
+	background-color: rgba(0, 217, 255, 0.644);
+	border-radius: 50%;
+}
+
 .chess_black_img {
 	display: flex;
 	width: 80%;
