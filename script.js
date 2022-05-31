@@ -19,11 +19,11 @@ const drawField = () => {
 		document.getElementById('container_chess').innerHTML += `
 		<div class="container_row">
 		${row.map((elem, elemIdx) => {
-			let findElem = [...whiteChesses, ...blackChesses].find(elem => {
+			let currentElem = [...whiteChesses, ...blackChesses].find(elem => {
 				return elem.position.row === rowIdx && elem.position.col === elemIdx
 			})
-			return `<div class="block_container">${findElem ?
-				drawChess(findElem.type) : ''}</div> `
+			return `<div class="block_container">${currentElem ?
+				drawChess(currentElem.type, currentElem.color) : ''}</div> `
 		}).join('')}
 		</div>`
 	})
@@ -32,10 +32,10 @@ const drawField = () => {
 
 drawField()
 
-function drawChess(chessType) {
+function drawChess(chessType, chessColor) {
 	// if (chessType === "queen") {
 	// 	return `<img src="./white_chess/queen.png">`
 	// }
-	console.log(chessType)
-	return `<div>${chessType}</div>`
+	console.log(chessColor)
+	return `<img class="chess_${chessColor}_img" src="./chesses/${chessType}.png"></img>`
 }
