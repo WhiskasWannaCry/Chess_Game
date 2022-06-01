@@ -11,8 +11,6 @@ const field = [
 	[0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
-let whiteMoves = 0;
-let blackMoves = 0;
 let selectedChess;
 
 const drawField = () => {
@@ -26,9 +24,13 @@ const drawField = () => {
 			let currentElem = [...whiteChesses, ...blackChesses].find(elem => {
 				return elem.position.row === rowIdx && elem.position.col === elemIdx
 			})
+			if (elem === 2) {
+				return `<div class="block_container_red">${currentElem ?
+					drawChess(currentElem) : ''}</div> `
+			}
 			if (elem === 1) {
 				return `<div class="block_container">
-					<div class="handlerForRadius" onclick="window.clickHandlerForRadius(${rowIdx},${elemIdx})">
+					<div class="handlerForRadius" onclick="window.clickHandlerForRadius(${rowIdx},${elemIdx}),${elem}">
 						<div class="radius"></div>
 					</div>
 				</div> `
@@ -50,33 +52,63 @@ const updateFieldArray = () => {
 }
 
 const changePawnPos = (chess, operation) => {
-	field[operation][chess.position.col] = 1;
-	field[operation][chess.position.col] = 1;
+	field[chess.position.row + operation][chess.position.col] = 1;
+	field[chess.position.row + operation][chess.position.col] = 1;
 	selectedChess = chess;
 }
 
-const pawnRenderVariation = (chess) => {
-	if (chess.color === "white") {
-		updateFieldArray()
-		if (chess.position.row === 6) {
-			changePawnPos(chess, chess.position.row - 1)
-			changePawnPos(chess, chess.position.row - 2)
+const pawnDanger = (pawn) => {
+	if (pawn.color === "white") {
+		blackChesses.forEach(elem => {
+			if ((selectedChess.position.row - 1 === elem.position.row
+				&& selectedChess.position.col + 1 === elem.position.col) ||
+				(selectedChess.position.row - 1 === elem.position.row
+					&& selectedChess.position.col - 1 === elem.position.col)) {
+				field[elem.position.row][elem.position.col] = 2;
+			}
+		})
+	}
+	else if (pawn.color === "black") {
+		whiteChesses.forEach(elem => {
+			if ((selectedChess.position.row + 1 === elem.position.row
+				&& selectedChess.position.col + 1 === elem.position.col) ||
+				(selectedChess.position.row + 1 === elem.position.row
+					&& selectedChess.position.col - 1 === elem.position.col)) {
+				field[elem.position.row][elem.position.col] = 2;
+			}
+		})
+	}
 
+}
+
+const pawnRenderVariation = (pawn) => {
+	if (pawn.color === "white") {
+		updateFieldArray()
+		if (pawn.position.row === 6) {
+			changePawnPos(pawn, - 1)
+			changePawnPos(pawn, - 2)
 		}
 		else {
-			changePawnPos(chess, chess.position.row - 1)
+			changePawnPos(pawn, - 1)
 		}
+		pawnDanger(pawn)
 	}
 	else {
 		updateFieldArray()
-		if (chess.position.row === 1) {
-			changePawnPos(chess, chess.position.row + 1)
-			changePawnPos(chess, chess.position.row + 2)
+		if (pawn.position.row === 1) {
+			changePawnPos(pawn, + 1)
+			changePawnPos(pawn, + 2)
 		}
 		else {
-			changePawnPos(chess, chess.position.row + 1)
+			changePawnPos(pawn, + 1)
 		}
+		pawnDanger(pawn)
 	}
+}
+
+// Не сделано
+const rookRenderVariation = (rook) => {
+	console.log(rook)
 }
 
 window.clickHandler = (id) => {
@@ -84,6 +116,21 @@ window.clickHandler = (id) => {
 	switch (currentElem.type) {
 		case "pawn":
 			pawnRenderVariation(currentElem)
+			break;
+		case "rook":
+			rookRenderVariation(currentElem)
+			break;
+		case "knight":
+			console.log(currentElem);
+			break;
+		case "bishop":
+			console.log(currentElem);
+			break;
+		case "queen":
+			console.log(currentElem);
+			break;
+		case "king":
+			console.log(currentElem);
 			break;
 	}
 	drawField()
@@ -93,22 +140,24 @@ window.clickHandlerForRadius = (rowRadius, columnRadius) => {
 	if (selectedChess.color === "white") {
 		if (rowRadius + 1 === selectedChess.position.row) {
 			selectedChess.position.row -= 1;
+			updateFieldArray()
 		}
 		else {
 			selectedChess.position.row -= 2;
+			updateFieldArray()
 		}
 	}
 	else {
 		if (rowRadius - 1 === selectedChess.position.row) {
 			selectedChess.position.row += 1;
+			updateFieldArray()
 		}
 		else {
 			selectedChess.position.row += 2;
+			updateFieldArray()
 		}
 	}
-	updateFieldArray()
 	drawField()
-
 }
 
 function drawChess(chess) {
