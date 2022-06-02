@@ -53,38 +53,50 @@ const updateFieldArray = () => {
 }
 
 const setRadiusIdxForPawnsVariation = (chess, operation) => {
-	let chessValid = [...whiteChesses, ...blackChesses].find(elem => elem.position.row === chess.position.row + operation &&
+	let count = 1;
+	if (operation === -1 || operation === -2) {
+		count = -1;
+	}
+	let chessValid = allChesses.find(elem => elem.position.row === chess.position.row + count &&
 		elem.position.col === chess.position.col)
 	if (!chessValid) {
-		field[chess.position.row + operation][chess.position.col] = 1;
+		if (chess.position.row > 0 && chess.position.row < field.length - 1) {
+			console.log(chessValid)
+			field[chess.position.row + operation][chess.position.col] = 1;
+		}
 	}
 	selectedChess = chess;
 }
 
 const pawnDanger = (pawn) => {
-	if (pawn.color === "white") {
-		blackChesses.forEach(elem => {
+	allChesses.forEach(elem => {
+		if (pawn.color === "white") {
 			if ((selectedChess.position.row - 1 === elem.position.row
 				&& selectedChess.position.col + 1 === elem.position.col) ||
 				(selectedChess.position.row - 1 === elem.position.row
 					&& selectedChess.position.col - 1 === elem.position.col)) {
-				field[elem.position.row][elem.position.col] = 2;
+				if (elem.color != "white") {
+					field[elem.position.row][elem.position.col] = 2;
+				}
 			}
-		})
-	}
-	else if (pawn.color === "black") {
-		whiteChesses.forEach(elem => {
+		}
+		else if (pawn.color === "black") {
 			if ((selectedChess.position.row + 1 === elem.position.row
 				&& selectedChess.position.col + 1 === elem.position.col) ||
 				(selectedChess.position.row + 1 === elem.position.row
 					&& selectedChess.position.col - 1 === elem.position.col)) {
-				field[elem.position.row][elem.position.col] = 2;
+				if (elem.color != "black") {
+					field[elem.position.row][elem.position.col] = 2;
+				}
 			}
-		})
-	}
+		}
+	})
 }
 
 const pawnRenderVariation = (pawn) => {
+	// let chessValid = allChesses.find(elem => elem.position.row === pawn.position.row - 1 &&
+	// 	elem.position.col === pawn.position.col)
+	// console.log(chessValid)
 	if (turn === "white") {
 		if (pawn.color === "white") {
 			updateFieldArray()
@@ -98,7 +110,6 @@ const pawnRenderVariation = (pawn) => {
 				pawnDanger(pawn)
 			}
 		}
-
 	}
 	else {
 		if (pawn.color === "black") {
@@ -112,7 +123,6 @@ const pawnRenderVariation = (pawn) => {
 				setRadiusIdxForPawnsVariation(pawn, + 1)
 				pawnDanger(pawn)
 			}
-
 		}
 	}
 }
@@ -123,7 +133,7 @@ const rookRenderVariation = (rook) => {
 }
 
 window.clickHandler = (id) => {
-	let currentElem = [...whiteChesses, ...blackChesses].find(elem => elem.id === id)
+	let currentElem = allChesses.find(elem => elem.id === id)
 	switch (currentElem.type) {
 		case "pawn":
 			pawnRenderVariation(currentElem)
