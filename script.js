@@ -82,14 +82,23 @@ const pawnDanger = (pawn) => {
 }
 
 const pawnRenderVariation = (pawn) => {
+	let blackChessValidation = blackChesses.find(elem => pawn.position.row - 1 === elem.position.row &&
+		pawn.position.col === elem.position.col)
+	let whiteChessValidation = whiteChesses.find(elem => pawn.position.row + 1 === elem.position.row &&
+		pawn.position.col === elem.position.col)
 	if (pawn.color === "white") {
 		updateFieldArray()
 		if (pawn.position.row === 6) {
 			changePawnPos(pawn, - 1)
 			changePawnPos(pawn, - 2)
+			pawnDanger(pawn)
 		}
 		else {
 			changePawnPos(pawn, - 1)
+			pawnDanger(pawn)
+		}
+		if (blackChessValidation) {
+			updateFieldArray()
 		}
 		pawnDanger(pawn)
 	}
@@ -101,6 +110,9 @@ const pawnRenderVariation = (pawn) => {
 		}
 		else {
 			changePawnPos(pawn, + 1)
+		}
+		if (whiteChessValidation) {
+			updateFieldArray()
 		}
 		pawnDanger(pawn)
 	}
@@ -116,6 +128,7 @@ window.clickHandler = (id) => {
 	switch (currentElem.type) {
 		case "pawn":
 			pawnRenderVariation(currentElem)
+			pawnDanger(currentElem)
 			break;
 		case "rook":
 			rookRenderVariation(currentElem)
