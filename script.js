@@ -10,8 +10,9 @@ const field = [
 	[0, 0, 0, 0, 0, 0, 0, 0],
 	[0, 0, 0, 0, 0, 0, 0, 0],
 ];
-
+let allChesses = [...whiteChesses, ...blackChesses];
 let selectedChess;
+let turn = "white";
 
 const drawField = () => {
 	document.body.innerHTML = ` `;
@@ -21,11 +22,11 @@ const drawField = () => {
 		document.getElementById('container_chess').innerHTML += `
 		<div class="container_row">
 		${row.map((elem, elemIdx) => {
-			let currentElem = [...whiteChesses, ...blackChesses].find(elem => {
+			let currentElem = allChesses.find(elem => {
 				return elem.position.row === rowIdx && elem.position.col === elemIdx
 			})
 			if (elem === 2) {
-				return `<div class="block_container_red">${currentElem ?
+				return `<div class="block_container_red" onclick="window.clickHandlerForFight(${rowIdx},${elemIdx})">${currentElem ?
 					drawChess(currentElem) : ''}</div> `
 			}
 			if (elem === 1) {
@@ -51,7 +52,7 @@ const updateFieldArray = () => {
 	})
 }
 
-const changePawnPos = (chess, operation) => {
+const setRadiusIdxForPawnsVariation = (chess, operation) => {
 	let chessValid = [...whiteChesses, ...blackChesses].find(elem => elem.position.row === chess.position.row + operation &&
 		elem.position.col === chess.position.col)
 	if (!chessValid) {
@@ -81,32 +82,39 @@ const pawnDanger = (pawn) => {
 			}
 		})
 	}
-
 }
 
 const pawnRenderVariation = (pawn) => {
+	if (turn === "white") {
+		if (pawn.color === "white") {
+			updateFieldArray()
+			if (pawn.position.row === 6) {
+				setRadiusIdxForPawnsVariation(pawn, - 1)
+				setRadiusIdxForPawnsVariation(pawn, - 2)
+				pawnDanger(pawn)
+			}
+			else {
+				setRadiusIdxForPawnsVariation(pawn, - 1)
+				pawnDanger(pawn)
+			}
+		}
 
-	if (pawn.color === "white") {
-		updateFieldArray()
-		if (pawn.position.row === 6) {
-			changePawnPos(pawn, - 1)
-			changePawnPos(pawn, - 2)
-		}
-		else {
-			changePawnPos(pawn, - 1)
-		}
 	}
 	else {
-		updateFieldArray()
-		if (pawn.position.row === 1) {
-			changePawnPos(pawn, + 1)
-			changePawnPos(pawn, + 2)
-		}
-		else {
-			changePawnPos(pawn, + 1)
+		if (pawn.color === "black") {
+			updateFieldArray()
+			if (pawn.position.row === 1) {
+				setRadiusIdxForPawnsVariation(pawn, + 1)
+				setRadiusIdxForPawnsVariation(pawn, + 2)
+				pawnDanger(pawn)
+			}
+			else {
+				setRadiusIdxForPawnsVariation(pawn, + 1)
+				pawnDanger(pawn)
+			}
+
 		}
 	}
-	pawnDanger(pawn)
 }
 
 // Не сделано
@@ -119,7 +127,6 @@ window.clickHandler = (id) => {
 	switch (currentElem.type) {
 		case "pawn":
 			pawnRenderVariation(currentElem)
-			pawnDanger(currentElem)
 			break;
 		case "rook":
 			rookRenderVariation(currentElem)
@@ -150,6 +157,7 @@ window.clickHandlerForRadius = (rowRadius, columnRadius) => {
 			selectedChess.position.row -= 2;
 			updateFieldArray()
 		}
+		turn = "black";
 	}
 	else {
 		if (rowRadius - 1 === selectedChess.position.row) {
@@ -160,11 +168,28 @@ window.clickHandlerForRadius = (rowRadius, columnRadius) => {
 			selectedChess.position.row += 2;
 			updateFieldArray()
 		}
+		turn = "white";
 	}
+	drawField()
+}
+
+window.clickHandlerForFight = (rowDanger, columnDanger) => {
+	let clickedDangerElem = allChesses.find(elem => {
+		return elem.position.row === rowDanger && elem.position.col === columnDanger
+	})
+	allChesses = allChesses.filter(elem => elem != clickedDangerElem)
+	selectedChess.position.row = clickedDangerElem.position.row;
+	selectedChess.position.col = clickedDangerElem.position.col;
+	if (selectedChess.color === "white") {
+		turn = "black"
+	}
+	else {
+		turn = "white"
+	}
+	updateFieldArray()
 	drawField()
 }
 
 function drawChess(chess) {
 	return `<img  onclick="window.clickHandler('${chess.id}')" class="chess_${chess.color}_img" src="./chesses/${chess.type}.png"></img>`
 }
-
