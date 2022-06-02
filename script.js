@@ -52,8 +52,11 @@ const updateFieldArray = () => {
 }
 
 const changePawnPos = (chess, operation) => {
-	field[chess.position.row + operation][chess.position.col] = 1;
-	field[chess.position.row + operation][chess.position.col] = 1;
+	let chessValid = [...whiteChesses, ...blackChesses].find(elem => elem.position.row === chess.position.row + operation &&
+		elem.position.col === chess.position.col)
+	if (!chessValid) {
+		field[chess.position.row + operation][chess.position.col] = 1;
+	}
 	selectedChess = chess;
 }
 
@@ -82,25 +85,16 @@ const pawnDanger = (pawn) => {
 }
 
 const pawnRenderVariation = (pawn) => {
-	let blackChessValidation = blackChesses.find(elem => pawn.position.row - 1 === elem.position.row &&
-		pawn.position.col === elem.position.col)
-	let whiteChessValidation = whiteChesses.find(elem => pawn.position.row + 1 === elem.position.row &&
-		pawn.position.col === elem.position.col)
+
 	if (pawn.color === "white") {
 		updateFieldArray()
 		if (pawn.position.row === 6) {
 			changePawnPos(pawn, - 1)
 			changePawnPos(pawn, - 2)
-			pawnDanger(pawn)
 		}
 		else {
 			changePawnPos(pawn, - 1)
-			pawnDanger(pawn)
 		}
-		if (blackChessValidation) {
-			updateFieldArray()
-		}
-		pawnDanger(pawn)
 	}
 	else {
 		updateFieldArray()
@@ -111,11 +105,8 @@ const pawnRenderVariation = (pawn) => {
 		else {
 			changePawnPos(pawn, + 1)
 		}
-		if (whiteChessValidation) {
-			updateFieldArray()
-		}
-		pawnDanger(pawn)
 	}
+	pawnDanger(pawn)
 }
 
 // Не сделано
