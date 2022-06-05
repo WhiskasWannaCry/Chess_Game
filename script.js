@@ -11,6 +11,8 @@ const field = [
 	[0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
+let chooseChess = ["rook", "pawn", "knight", "bishop", "queen"]; //сделать обьектами
+
 const selectFinishPawnChesses = [0, 0, 0, 0, 0]
 let allChesses = [...whiteChesses, ...blackChesses];
 let selectedChess;
@@ -226,12 +228,10 @@ function drawSelectNewChessForPawns() {
 		<span>Select new chess:</span>
 		<div class="select_chesses">
 			${selectFinishPawnChesses.map((elem, elemIdx) => {
-			let chessForRender = whiteChesses.filter(elem => elem.position.row === 7 && elem.position.col < 5)
-			chessForRender[1] = selectedChess;
-			let chessForRenderBlack = blackChesses.filter(elem => elem.position.row === 0 && elem.position.col < 5)
-			chessForRenderBlack[1] = selectedChess;
+			// selectedChess.color === "white" ? chooseChess[elemIdx].color = "white" : chooseChess[elemIdx].color = "black";
+			// console.log(chooseChess[elemIdx].color)
 			return `<div class="select" onclick="window.drawSelectedChess()"> 
-			${chessForRender[1].color === "white" ? drawChess(chessForRender[elemIdx]) : drawChess(chessForRenderBlack[elemIdx])}
+			${drawSelectedChess(elemIdx)}
 		</div> `
 		}).join(' ')}
 		</div>
@@ -239,8 +239,15 @@ function drawSelectNewChessForPawns() {
 	}
 }
 
-window.drawSelectedChess = () => {
-	console.log()
+window.drawSelectedChess = (idx) => {
+	return `<img  onclick = "window.clickHandlerForSelectedChess('${idx}')" class="select" src = "./chesses/${chooseChess[idx]}.png" ></ > `
+}
+
+window.clickHandlerForSelectedChess = (index) => {
+	selectedChess.type = chooseChess[index];
+	console.log(selectedChess)
+	updateHTML()
+	drawField()
 }
 
 function drawChess(chess) {
