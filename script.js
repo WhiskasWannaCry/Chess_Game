@@ -16,7 +16,8 @@ let turn = "white";
 
 const drawField = () => {
 	document.body.innerHTML = ` `;
-	// document.body.innerHTML += `<div class="container_lose_black"></div>`;
+	document.body.innerHTML += `<div class="container_turn"><span>Now Turn:</span>
+	${turn === "white" ? `<span class="white_turn"></span></div>` : `<span class="black_turn"></span></div>`}`;
 	document.body.innerHTML += `<div id="container_chess" class="container_chess"></div>`;
 	field.forEach((row, rowIdx) => {
 		document.getElementById('container_chess').innerHTML += `
@@ -61,9 +62,9 @@ const setRadiusIdxForPawnsVariation = (chess, operation) => {
 		elem.position.col === chess.position.col)
 	if (!chessValid) {
 		if (chess.position.row > 0 && chess.position.row < field.length - 1) {
-			console.log(chessValid)
 			field[chess.position.row + operation][chess.position.col] = 1;
 		}
+
 	}
 	selectedChess = chess;
 }
@@ -94,15 +95,21 @@ const pawnDanger = (pawn) => {
 }
 
 const pawnRenderVariation = (pawn) => {
-	// let chessValid = allChesses.find(elem => elem.position.row === pawn.position.row - 1 &&
-	// 	elem.position.col === pawn.position.col)
-	// console.log(chessValid)
+	let count = -2;
+	if (pawn.color === "black") {
+		count = 2;
+	}
+	let chessValid = allChesses.find(elem => elem.position.row === pawn.position.row + count &&
+		elem.position.col === pawn.position.col)
 	if (turn === "white") {
 		if (pawn.color === "white") {
 			updateFieldArray()
 			if (pawn.position.row === 6) {
 				setRadiusIdxForPawnsVariation(pawn, - 1)
-				setRadiusIdxForPawnsVariation(pawn, - 2)
+				if (!chessValid) {
+					setRadiusIdxForPawnsVariation(pawn, - 2)
+				}
+
 				pawnDanger(pawn)
 			}
 			else {
@@ -116,7 +123,9 @@ const pawnRenderVariation = (pawn) => {
 			updateFieldArray()
 			if (pawn.position.row === 1) {
 				setRadiusIdxForPawnsVariation(pawn, + 1)
-				setRadiusIdxForPawnsVariation(pawn, + 2)
+				if (!chessValid) {
+					setRadiusIdxForPawnsVariation(pawn, + 2)
+				}
 				pawnDanger(pawn)
 			}
 			else {
@@ -181,6 +190,7 @@ window.clickHandlerForRadius = (rowRadius, columnRadius) => {
 		turn = "white";
 	}
 	drawField()
+
 }
 
 window.clickHandlerForFight = (rowDanger, columnDanger) => {
