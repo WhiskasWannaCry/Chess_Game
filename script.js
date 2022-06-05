@@ -10,14 +10,17 @@ const field = [
 	[0, 0, 0, 0, 0, 0, 0, 0],
 	[0, 0, 0, 0, 0, 0, 0, 0],
 ];
+
+const selectFinishPawnChesses = [0, 0, 0, 0, 0]
 let allChesses = [...whiteChesses, ...blackChesses];
 let selectedChess;
 let turn = "white";
 
+const updateHTML = () => {
+	return document.body.innerHTML = ` `;
+}
+
 const drawField = () => {
-	document.body.innerHTML = ` `;
-	document.body.innerHTML += `<div class="container_turn"><span>Now Turn:</span>
-	${turn === "white" ? `<span class="white_turn"></span></div>` : `<span class="black_turn"></span></div>`}`;
 	document.body.innerHTML += `<div id="container_chess" class="container_chess"></div>`;
 	field.forEach((row, rowIdx) => {
 		document.getElementById('container_chess').innerHTML += `
@@ -42,9 +45,11 @@ const drawField = () => {
 		}).join('')}
 		</div>`
 	})
+	document.body.innerHTML += `<div class="container_turn"><span>Now Turn:</span>
+	<span class=${turn === "white" ? "white_turn" : "black_turn"}></span></div></div>`;
 	// document.body.innerHTML += `<div div class="container_lose_white"></div>`;
 }
-
+updateHTML()
 drawField()
 
 const updateFieldArray = () => {
@@ -163,6 +168,7 @@ window.clickHandler = (id) => {
 			console.log(currentElem);
 			break;
 	}
+	updateHTML()
 	drawField()
 }
 
@@ -189,8 +195,8 @@ window.clickHandlerForRadius = (rowRadius, columnRadius) => {
 		}
 		turn = "white";
 	}
+	updateHTML()
 	drawField()
-
 }
 
 window.clickHandlerForFight = (rowDanger, columnDanger) => {
@@ -207,9 +213,36 @@ window.clickHandlerForFight = (rowDanger, columnDanger) => {
 		turn = "white"
 	}
 	updateFieldArray()
+	updateHTML()
+
 	drawField()
+	drawSelectNewChessForPawns()
+}
+function drawSelectNewChessForPawns() {
+	if (selectedChess && ((selectedChess.position.row === 0 && selectedChess.color === "white") ||
+		(selectedChess.position.row === field.length - 1 && selectedChess.color === "black"))) {
+		document.body.innerHTML += `
+	<div class="pawn_finish_change">
+		<span>Select new chess:</span>
+		<div class="select_chesses">
+			${selectFinishPawnChesses.map((elem, elemIdx) => {
+			let chessForRender = whiteChesses.filter(elem => elem.position.row === 7 && elem.position.col < 5)
+			chessForRender[1] = selectedChess;
+			let chessForRenderBlack = blackChesses.filter(elem => elem.position.row === 0 && elem.position.col < 5)
+			chessForRenderBlack[1] = selectedChess;
+			return `<div class="select" onclick="window.drawSelectedChess()"> 
+			${chessForRender[1].color === "white" ? drawChess(chessForRender[elemIdx]) : drawChess(chessForRenderBlack[elemIdx])}
+		</div> `
+		}).join(' ')}
+		</div>
+	</div>`
+	}
+}
+
+window.drawSelectedChess = () => {
+	console.log()
 }
 
 function drawChess(chess) {
-	return `<img  onclick="window.clickHandler('${chess.id}')" class="chess_${chess.color}_img" src="./chesses/${chess.type}.png"></img>`
+	return `<img  onclick = "window.clickHandler('${chess.id}')" class="chess_${chess.color}_img" src = "./chesses/${chess.type}.png" ></ > `
 }
